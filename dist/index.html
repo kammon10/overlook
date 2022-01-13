@@ -7,10 +7,29 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
+  <section class="header-section">
+    <h1>Overlook Hotel</h1>
+    <div class="header-styling">
+      <button class="see-bookings">my reservations<button>
+      <p>total spent</p>
+    </div>
+    <button class="new-reservation-js">new reservation</button>
+  </section>
+  
+  <section class="calendar-container">
+    <div class="date-picker hidden">
+      <div class="'selected-date">01 / 12 / 2022</div>
+      <div class="dates">
+        <div class="month">
+          <button class="arrows prev-month"><</button>
+          <div class="month">7 July</div>
+          <button class="arrows next-month">></button>
+        </div>
+        <div class="days"></div>
+      </div>
+      </div>
+  </section> 
+  <script src="bundle.js"></script>
 </body>
 </html>
