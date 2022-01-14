@@ -7,10 +7,19 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <section class="calendar-container">
+    <div class="date-picker hidden">
+      <section class="'selected-date">may</section>
+      <section class="dates datesjs">
+        <section class="month">
+          <button class="arrows prev-month"><</button>
+          <div class="mth"></div>
+          <button class="arrows next-month">></button>
+        </section>
+        <section class="days"></section>
+      </section>
+    </div>
+  </section> 
   <script src="bundle.js"></script>
-
 </body>
 </html>
