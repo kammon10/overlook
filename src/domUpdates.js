@@ -74,6 +74,8 @@ function showCalander() {
   populateDates()
 }
 
+
+
 // HELPER FUNCTIONS
 
 function formatDate(d) {
@@ -88,7 +90,6 @@ function formatDate(d) {
   let year = d.getFullYear();
   return `0${day} / 0${month} / ${year}` 
 }
-
 
 export {
   showCalander, 
