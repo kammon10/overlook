@@ -41,10 +41,9 @@ button:hover {
 
 .date-picker {
   position: relative;
-  border: 2px solid gold;
   background-color: $header-background;
   color: $button-text;
-  width: 400px;
+  width: 350px;
   height: 80px;
   cursor: pointer;
 }
@@ -59,7 +58,7 @@ button:hover {
 
 .dates {
   background-color: $header-background;
-  border: 2px solid green;
+ 
   position: absolute;
   top: 100%;
   left: 0;

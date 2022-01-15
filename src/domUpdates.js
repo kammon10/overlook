@@ -7,6 +7,7 @@ const displayCalander = document.querySelector('.display-calander');
 const monthSection = document.querySelector('.month');
 const mth = document.querySelector('.mth')
 const daySection = document.querySelector('.days')
+const roomTypeForm = document.querySelector('.room-type-form')
 
 //QUERY SELECTORS BUTTONS
 const newResButton = document.querySelector('.new-reservation-js')
@@ -16,7 +17,8 @@ const prevMonthBtn = document.querySelector('.prev-month');
 //EVENT LISTENERS
 newResButton.addEventListener('click', showCalander);
 nextMonthBtn.addEventListener('click', showNextMonth);
-prevMonthBtn.addEventListener('click', showPrevMonth)
+prevMonthBtn.addEventListener('click', showPrevMonth);
+
 
 //UNIVERSAL VARS
 // eslint-disable-next-line max-len
@@ -38,7 +40,7 @@ populateDates()
 function populateDates() {
   let daysInMonth = 31;
   daySection.innerHTML = '';
-  for (let i = 0; i < daysInMonth.length; i++) {
+  for (let i = 0; i < daysInMonth; i++) {
     daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
     daySection.appendChild(daySection);
   }
