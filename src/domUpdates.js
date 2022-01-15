@@ -40,7 +40,7 @@ function populateDates(d) {
   let daysInMonth = 31;
   daySection.innerHTML = '';
   for (let i = 0; i < daysInMonth.length; i++) {
-    daySection.innerHTML += `<section class="${day}">${i + 1}</section`
+    daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
     daySection.appendChild(daySection);
   }
 
