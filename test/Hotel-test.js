@@ -39,4 +39,8 @@ describe('Hotel', () => {
   it('should store the customers current Bookings', () => {
     expect(hotel.currentCustomerBookings.length).to.equal(2)
   })
+
+  it('should calculate the total cost', () => {
+    expect(hotel.totalCost).to.equal(968.52)
+  })
 }) 

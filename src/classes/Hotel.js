@@ -3,16 +3,19 @@ class Hotel {
     this.rooms = rooms;
     this.bookings = bookings;
     this.customer = customer;
-    this.currentCustomerBookings;
+    this.currentCustomerBookings = [];
     this.totalCost = 0;
+    console.log(this.bookings[0].userID)
+    console.log(this.customer.id)
   }
+
   findCurrentCustomerBookings() {
     const currentBookings = this.bookings.filter(booking => {
-      if(this.customer.id === this.bookings.userID) {
+      if (booking.userID === this.customer.id) {
         return booking
       }
-    });
-    this.currentCustomerBookings = currentBookings
+      this.currentCustomerBookings = currentBookings
+    })
   }
 
   calculateTotalCost() {
