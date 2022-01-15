@@ -22,7 +22,7 @@ prevMonthBtn.addEventListener('click', showPrevMonth)
 // eslint-disable-next-line max-len
 const months = ['January', 'Febuary', 'March', 'April', 'May', 'Jun','July', 'August', 'September', 'October', 'November', 'December'];
 let date = new Date();
-let day = date.getDate();
+let day = date.getDay();
 let month = date.getMonth();
 let year = date.getFullYear();
 
@@ -32,11 +32,10 @@ let selectedMonth = month;
 let selectedYear = year;
 
 mth.innerText = `${months[month]} ${year}`;
-selectedDateSection.textContent = formatDate(date);
 populateDates()
 
 //FUNCTIONS
-function populateDates(d) {
+function populateDates() {
   let daysInMonth = 31;
   daySection.innerHTML = '';
   for (let i = 0; i < daysInMonth.length; i++) {
@@ -72,6 +71,7 @@ function showNextMonth() {
 function showCalander() {
   datePickerSection.classList.toggle('hidden');
   populateDates()
+  formatDate(date)
 }
 
 
@@ -88,7 +88,8 @@ function formatDate(d) {
     month = `0${month}`
   }
   let year = d.getFullYear();
-  return `0${day} / 0${month} / ${year}` 
+  selectedDateSection.innerText = `0${day} / 0${month} / ${year}` 
+
 }
 
 export {
