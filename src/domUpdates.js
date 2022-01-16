@@ -5,20 +5,22 @@ const datePickerSection = document.querySelector('.date-picker');
 const selectedDateSection = document.querySelector('selected-date');
 const displayCalander = document.querySelector('.display-calander');
 const monthSection = document.querySelector('.month');
-const mth = document.querySelector('.mth')
-const daySection = document.querySelector('.days')
-const roomTypeForm = document.querySelector('.room-type-form')
+const mth = document.querySelector('.mth');
+const daySection = document.querySelector('.days');
+const roomTypeForm = document.querySelector('.room-type-form');
+const AllUserResSection = document.querySelector('.show-all-reservations-page');
 
 //QUERY SELECTORS BUTTONS
 const newResButton = document.querySelector('.new-reservation-js')
 const nextMonthBtn = document.querySelector('.next-month');
 const prevMonthBtn = document.querySelector('.prev-month');
+const showReservationsBtn = document.querySelector('.see-bookings')
 
 //EVENT LISTENERS
 newResButton.addEventListener('click', showCalander);
 nextMonthBtn.addEventListener('click', showNextMonth);
 prevMonthBtn.addEventListener('click', showPrevMonth);
-
+showReservationsBtn.addEventListener('click', displayAllReservations)
 
 //UNIVERSAL VARS
 // eslint-disable-next-line max-len
@@ -37,19 +39,21 @@ mth.innerText = `${months[month]} ${year}`;
 populateDates()
 
 //FUNCTIONS
-function populateDates() {
-  let daysInMonth = 31;
-  daySection.innerHTML = '';
-  for (let i = 0; i < daysInMonth; i++) {
-    daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
-    daySection.appendChild(daySection);
-  }
+function displayAllReservations() {
+  AllUserResSection.classList.toggle('hidden')
+  
+}
 
+function populateDates() {
+  daySection.innerHTML = '';
+  
   if (month === 1) {
     daysInMonth = 28;
-  } else if (month === 3 || month === 5, month === 8, month === 10) {
+  } else if (month === 3 || month === 5 || month === 8 || month === 10) {
     daysInMonth = 30;
   }
+    // daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
+    // daySection.appendChild(daySection);
 }
 
 function showPrevMonth() {

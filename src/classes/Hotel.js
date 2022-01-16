@@ -5,8 +5,8 @@ class Hotel {
     this.customer = customer;
     this.currentCustomerBookings;
     this.totalCost = 0;
-    console.log(this.bookings[0].userID)
-    console.log(this.customer.id)
+    console.log(this.bookings)
+    console.log(this.customer)
   }
 
   findCurrentCustomerBookings() {
