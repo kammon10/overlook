@@ -41,7 +41,7 @@ populateDates()
 //FUNCTIONS
 function displayAllReservations() {
   AllUserResSection.classList.toggle('hidden')
-  
+  //
 }
 
 function populateDates() {
