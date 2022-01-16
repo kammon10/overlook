@@ -9,6 +9,7 @@ const mth = document.querySelector('.mth');
 const daySection = document.querySelector('.days');
 const roomTypeForm = document.querySelector('.room-type-form');
 const AllUserResSection = document.querySelector('.show-all-reservations-page');
+const reservationInfo = document.querySelector('.reservation-info');
 
 //QUERY SELECTORS BUTTONS
 const newResButton = document.querySelector('.new-reservation-js')
@@ -41,7 +42,10 @@ populateDates()
 //FUNCTIONS
 function displayAllReservations() {
   AllUserResSection.classList.toggle('hidden')
-  //retrieve hotel.currentCustomerBookings
+  const findBookings = hotel.bookings.filter(booking => {
+    if (hotel.customer.id === booking.userID) {
+      reservationInfo.innerText = booking
+  });
 }
 
 function populateDates() {
@@ -94,7 +98,6 @@ function formatDate(d) {
     month = `0${month}`
   }
   let year = d.getFullYear();
-  selectedDateSection.innerText = `0${day} / 0${month} / ${year}` 
 
 }
 

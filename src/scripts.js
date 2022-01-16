@@ -45,10 +45,20 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
   })
 
 hotel = new Hotel(roomsData, allBookingsData, customerIndex);
+domUpdates.displayRoomOptions
+
+
+
+
+
+
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
+
+
+
 
 export {
 
