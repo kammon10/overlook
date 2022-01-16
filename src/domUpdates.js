@@ -1,4 +1,4 @@
-
+ 
 //QUERY SELECTORS
 const calenderContainer = document.querySelector('.calendar-container');
 const datePickerSection = document.querySelector('.date-picker');
@@ -20,7 +20,7 @@ const showReservationsBtn = document.querySelector('.see-bookings')
 newResButton.addEventListener('click', showCalander);
 nextMonthBtn.addEventListener('click', showNextMonth);
 prevMonthBtn.addEventListener('click', showPrevMonth);
-showReservationsBtn.addEventListener('click', displayAllReservations)
+showReservationsBtn.addEventListener('click', displayAllReservations);
 
 //UNIVERSAL VARS
 // eslint-disable-next-line max-len
@@ -41,7 +41,7 @@ populateDates()
 //FUNCTIONS
 function displayAllReservations() {
   AllUserResSection.classList.toggle('hidden')
-  //
+  //retrieve hotel.currentCustomerBookings
 }
 
 function populateDates() {
@@ -97,6 +97,7 @@ function formatDate(d) {
   selectedDateSection.innerText = `0${day} / 0${month} / ${year}` 
 
 }
+
 
 export {
   showCalander, 
