@@ -19,7 +19,6 @@ body {
 .header-styling {
   border: none;
   @include flex-row;
-  width: 15%;
 }
 
 button {
@@ -42,18 +41,24 @@ button:hover {
 
 .date-picker {
   position: relative;
-  border: 2px solid gold;
   background-color: $header-background;
   color: $button-text;
-  width: 300px;
+  width: 350px;
   height: 80px;
   cursor: pointer;
-  user-select: none;
+}
+
+
+
+.radio-styling {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .dates {
   background-color: $header-background;
-  border: 2px solid green;
+ 
   position: absolute;
   top: 100%;
   left: 0;
@@ -64,12 +69,30 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+.radio-styling {
+  display: inline-block;
 }
 
 .month {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.days {
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+}
+
+.day {
+ display: flex;
+ justify-content: center;
+ align-items: center; 
 }
 
 .arrows {
@@ -87,3 +110,4 @@ button:hover {
 .hidden {
   display: none;
 }
+

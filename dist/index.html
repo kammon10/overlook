@@ -16,20 +16,41 @@
     </div>
     <button class="new-reservation-js">new reservation</button>
   </section>
-  
   <section class="calendar-container">
     <div class="date-picker hidden">
-      <div class="'selected-date">01 / 12 / 2022</div>
-      <div class="dates">
-        <div class="month">
+      <form class="room-type-form">
+          <div class="radio-styling">
+            <div class="radio-display">
+              <input type="radio" name="roomType" value="residential suite">
+              <label for="residential">Residential Suite</label>
+            </div>
+            <div class="radio-display">
+              <input type="radio" name="roomType" value="junor suite">
+              <label for="junior">Junior Suite</label>
+            </div>
+          </div>
+          <div class="radio-styling">
+            <div class="radio-display">
+              <input type="radio" name="roomType" value="suite">
+              <label for="suite">Suite</label>
+            </div> 
+            <div class="radio-display">
+              <input type="radio" name="roomType" value="single room">
+              <label for="single">Single Room</label>
+            </div>
+          </div>
+        
+        </form>
+      <section class="dates datesjs">
+        <section class="month">
           <button class="arrows prev-month"><</button>
-          <div class="month">7 July</div>
+          <div class="mth"></div>
           <button class="arrows next-month">></button>
-        </div>
-        <div class="days"></div>
-      </div>
-      </div>
-  </section> 
+        </section>
+        <section class="days"></section>
+      </section>
+    </div>
+  </section>
   <script src="bundle.js"></script>
 </body>
 </html>
