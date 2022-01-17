@@ -11,7 +11,6 @@ body {
   background-color: $header-background;
   color: #d1cdb0;
   opacity: 1;
-  border: 1px solid black;
   @include flex-row;
   padding: 1%;
 }
@@ -48,8 +47,6 @@ button:hover {
   cursor: pointer;
 }
 
-
-
 .radio-styling {
   display: flex;
   flex-direction: row;
@@ -66,10 +63,7 @@ button:hover {
 }
 
 .date-picker {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  @include flex-center;
 }
 
 .radio-styling {
@@ -90,9 +84,7 @@ button:hover {
 }
 
 .day {
- display: flex;
- justify-content: center;
- align-items: center; 
+  @include flex-center;
 }
 
 .arrows {
@@ -105,8 +97,18 @@ button:hover {
   border-radius: 20%;
 }
 
+.show-all-reservations-page {
+  @include flex-center;
+}
 
-
+.reservation-info {
+  background-color: $header-background;
+  color: $button-text;
+  font-size: 20px;
+  width: 50%;
+  padding: 30px;
+  @include flex-center;
+}
 .hidden {
   display: none;
 }

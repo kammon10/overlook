@@ -1,3 +1,11 @@
+ import {
+  userIndex,
+  roomsData,
+  allBookingsdata,
+  customerIndex,
+  currentCustomer,
+  hotel
+ } from './scripts';
 
 //QUERY SELECTORS
 const calenderContainer = document.querySelector('.calendar-container');
@@ -5,24 +13,32 @@ const datePickerSection = document.querySelector('.date-picker');
 const selectedDateSection = document.querySelector('selected-date');
 const displayCalander = document.querySelector('.display-calander');
 const monthSection = document.querySelector('.month');
-const mth = document.querySelector('.mth')
-const daySection = document.querySelector('.days')
-const roomTypeForm = document.querySelector('.room-type-form')
+const mth = document.querySelector('.mth');
+const daySection = document.querySelector('.days');
+const roomTypeForm = document.querySelector('.room-type-form');
+const AllUserResSection = document.querySelector('.show-all-reservations-page');
+const reservationInfo = document.querySelector('.reservation-info');
+const displayTotalSpent = document.querySelector('.display-total-spent')
 
 //QUERY SELECTORS BUTTONS
 const newResButton = document.querySelector('.new-reservation-js')
 const nextMonthBtn = document.querySelector('.next-month');
 const prevMonthBtn = document.querySelector('.prev-month');
+const showReservationsBtn = document.querySelector('.see-bookings')
 
 //EVENT LISTENERS
-newResButton.addEventListener('click', showCalander);
+// newResButton.addEventListener('click', showCalander);
+window.addEventListener('load', displayInfo)
 nextMonthBtn.addEventListener('click', showNextMonth);
 prevMonthBtn.addEventListener('click', showPrevMonth);
-
+showReservationsBtn.addEventListener('click', function() {
+  displayAllReservations(hotel.findCurrentCustomerBookings())
+});
 
 //UNIVERSAL VARS
-// eslint-disable-next-line max-len
-const months = ['January', 'Febuary', 'March', 'April', 'May', 'Jun','July', 'August', 'September', 'October', 'November', 'December'];
+
+const months = ['January', 'Febuary', 'March', 'April', 'May', 
+'Jun','July', 'August', 'September', 'October', 'November', 'December'];
 let date = new Date();
 let day = date.getDay();
 let month = date.getMonth();
@@ -36,20 +52,59 @@ let selectedYear = year;
 mth.innerText = `${months[month]} ${year}`;
 populateDates()
 
-//FUNCTIONS
-function populateDates() {
-  let daysInMonth = 31;
-  daySection.innerHTML = '';
-  for (let i = 0; i < daysInMonth; i++) {
-    daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
-    daySection.appendChild(daySection);
-  }
 
+
+//FUNCTIONS
+
+function displayInfo() {
+
+}
+
+function show(elements) {
+  elements.forEach(element => {
+    element.classList.remove('hidden');
+  });
+}
+
+function hide(elements) {
+  elements.forEach(element => {
+    element.classList.add('hidden')
+  });
+}
+
+function totalSpent() {
+  displayTotalSpent.innerText = `$${hotel.totalCost}`
+}
+
+function displayAllReservations(customerBookings) {
+  AllUserResSection.classList.toggle('hidden')
+  reservationInfo.innerHTML = '';
+  console.log(customerBookings)
+  if (customerBookings.length > 0) {
+    customerBookings.forEach(booking => {
+      let selectedRoom = hotel.rooms.find(room => 
+        room.number === booking.roomNumber)
+      reservationInfo.innerHTML += `
+        <ul>
+          <li class="booking-date">Date: ${booking.date}</li>
+          <li class="room-type">Room Type: ${selectedRoom.roomType}</li>
+        </ul>`
+        
+    })
+  }
+}
+
+
+function populateDates() {
+  daySection.innerHTML = '';
+  
   if (month === 1) {
     daysInMonth = 28;
-  } else if (month === 3 || month === 5, month === 8, month === 10) {
+  } else if (month === 3 || month === 5 || month === 8 || month === 10) {
     daysInMonth = 30;
   }
+    // daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
+    // daySection.appendChild(daySection);
 }
 
 function showPrevMonth() {
@@ -90,14 +145,16 @@ function formatDate(d) {
     month = `0${month}`
   }
   let year = d.getFullYear();
-  selectedDateSection.innerText = `0${day} / 0${month} / ${year}` 
 
 }
+
 
 export {
   showCalander, 
   populateDates,
   showPrevMonth,
   showNextMonth,
-  formatDate  
+  formatDate,
+  displayAllReservations,
+  totalSpent,
 }
