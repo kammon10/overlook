@@ -29,29 +29,22 @@ addNewBookingAPI
 let userIndex;
 let currentcustomer;
 let hotel;
-let customerData;
+let customersData;
 let roomsData;
 let allBookingsData;
 let customerIndex;
 let currentCustomer;
+let addNewBookingData;
 
 //FUNCTIONS
 Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
   .then(data => {
-[customerData, roomsData, allBookingsData] = [data[0], data[1], data[2]];
+// eslint-disable-next-line max-len
+[customersData, roomsData, allBookingsData, addNewBookingData] = [data[0], data[1], data[2], data[3]];
     customerIndex = getRandomIndex(sampleCustomers);
     currentCustomer = new Customer(sampleCustomers[customerIndex]);
-    
-  })
-
-hotel = new Hotel(roomsData, allBookingsData, customerIndex);
-domUpdates.displayRoomOptions
-
-
-
-
-
-
+    hotel = new Hotel(sampleRooms, sampleBookings, currentCustomer);
+});
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
@@ -61,5 +54,13 @@ function getRandomIndex(array) {
 
 
 export {
-
+  userIndex,
+  currentcustomer,
+  hotel, 
+  customersData,
+  roomsData,
+  allBookingsData,
+  customerIndex,
+  currentCustomer,
+  addNewBookingData
 }

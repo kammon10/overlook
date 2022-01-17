@@ -13,7 +13,7 @@ class Hotel {
         return booking
       }
     })
-    this.currentCustomerBookings = currentBookings
+    return this.currentCustomerBookings = currentBookings
   }
 
   calculateTotalCost() {
@@ -26,6 +26,7 @@ class Hotel {
       return acc
     }, 0)
     this.totalCost = totalCost;
+    return totalCost
   }
 }
 

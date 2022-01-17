@@ -11,3 +11,4 @@ let addNewBookingAPI = fetch("http://localhost:3001/api/v1/bookings")
   .then(response => response.json())
 
 export {allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI}
+
