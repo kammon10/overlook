@@ -78,14 +78,14 @@ populateDates()
 
 //FUNCTIONS
 
+
 function displayInfo(hotel) {
-  console.log('hi!', hotel)
   hotel.findCurrentCustomerBookings()
   hotel.calculateTotalCost()
   totalSpent()
 }
 
-function totalSpent() {
+function totalSpent() { 
  displayTotalSpent.innerText = `$${hotel.totalCost}`
 }
 
@@ -182,4 +182,5 @@ function populateDates() {
   formatDate,
   displayAllReservations,
   totalSpent,
+  displayInfo
 }

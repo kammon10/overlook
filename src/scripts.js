@@ -7,7 +7,8 @@ import {
   showCalander, 
   populateDates, 
   showPrevMonth, 
-  showNextMonth
+  showNextMonth,
+  displayInfo
 } from './domUpdates';
 import {
   sampleCustomers,
@@ -17,7 +18,7 @@ import {
 
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
-
+import Booking from './classes/Bookings';
 import {
 allCustomersAPI, 
 roomsAPI, 
@@ -37,14 +38,12 @@ let roomsData;
 let allBookingsData;
 let customerIndex;
 let addNewBookingData;
-let domUpdates;
 let user;
 
 //FUNCTIONS
 Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
-  .then(data => {
-// eslint-disable-next-line max-len
-[customersData, roomsData, allBookingsData, addNewBookingData] = [data[0], data[1], data[2], data[3]];
+  .then(data => {[customersData, roomsData, allBookingsData, addNewBookingData] = [
+  data[0], data[1], data[2], data[3]];
 
     function getRandomIndex(array) {
       return Math.floor(Math.random() * array.length)
@@ -53,23 +52,19 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
     customers = data[0].customers.map(customer => {
       return new Customer(customer)
     })
-    
+
     currentCustomer = new Customer(customers[getRandomIndex(customers)])
+    
    
-    bookings = data[2].bookings;
+    bookings = data[2].bookings.map(booking => {
+      return new Booking(booking)
+    });
+
     rooms = data[1].rooms;
     hotel = new Hotel(rooms, bookings, currentCustomer);
-    // function findUserInfo(userNo) {
-    //   const newCustomer = customers.find(customer => customer[userNo] === userNo)
-    //   console.log('NC', newCustomer)
-    //   return newCustomer
-    // }
-  
-    
-
-    domUpdates.displayInfo(currentCustomer, currentCustomer, bookings)
-  })
-
+    console.log(hotel)
+  displayInfo(hotel)
+}) 
 
 
 // window.addEventListenergrabdate(event) {
@@ -90,5 +85,4 @@ export {
   allBookingsData,
   customerIndex,
   addNewBookingData,
-  domUpdates,
 }
