@@ -27,7 +27,7 @@ const prevMonthBtn = document.querySelector('.prev-month');
 const showReservationsBtn = document.querySelector('.see-bookings')
 
 //EVENT LISTENERS
-// newResButton.addEventListener('click', showCalander);
+newResButton.addEventListener('click', showCalander);
 window.addEventListener('load', displayInfo)
 nextMonthBtn.addEventListener('click', showNextMonth);
 prevMonthBtn.addEventListener('click', showPrevMonth);
