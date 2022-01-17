@@ -27,40 +27,68 @@ addNewBookingAPI
 
 // GLOBAL VARIABLES
 let userIndex;
-let currentcustomer;
+let customers;
+let currentCustomer;
 let hotel;
+let bookings;
+let rooms;
 let customersData;
 let roomsData;
 let allBookingsData;
 let customerIndex;
-let currentCustomer;
 let addNewBookingData;
+let domUpdates;
+let user;
 
 //FUNCTIONS
 Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
   .then(data => {
 // eslint-disable-next-line max-len
 [customersData, roomsData, allBookingsData, addNewBookingData] = [data[0], data[1], data[2], data[3]];
-    customerIndex = getRandomIndex(sampleCustomers);
-    currentCustomer = new Customer(sampleCustomers[customerIndex]);
-    hotel = new Hotel(sampleRooms, sampleBookings, currentCustomer);
-});
 
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length)
-}
+    function getRandomIndex(array) {
+      return Math.floor(Math.random() * array.length)
+    } 
+
+    customers = data[0].customers.map(customer => {
+      return new Customer(customer)
+    })
+    
+    currentCustomer = new Customer(customers[getRandomIndex(customers)])
+   
+    bookings = data[2].bookings;
+    rooms = data[1].rooms;
+    hotel = new Hotel(rooms, bookings, currentCustomer);
+    // function findUserInfo(userNo) {
+    //   const newCustomer = customers.find(customer => customer[userNo] === userNo)
+    //   console.log('NC', newCustomer)
+    //   return newCustomer
+    // }
+  
+    
+
+    domUpdates.displayInfo(currentCustomer, currentCustomer, bookings)
+  })
 
 
+
+// window.addEventListenergrabdate(event) {
+//     event.preventDefault();
+//     console.log(dateControl.value)
+//   }
 
 
 export {
   userIndex,
-  currentcustomer,
-  hotel, 
+  customers,
+  currentCustomer,
+  hotel,
+  bookings,
+  rooms,
   customersData,
   roomsData,
   allBookingsData,
   customerIndex,
-  currentCustomer,
-  addNewBookingData
+  addNewBookingData,
+  domUpdates,
 }

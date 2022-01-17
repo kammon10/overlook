@@ -1,13 +1,20 @@
  import {
   userIndex,
-  roomsData,
-  allBookingsdata,
-  customerIndex,
+  customers,
   currentCustomer,
-  hotel
+  hotel,
+  bookings,
+  rooms,
+  customersData,
+  roomsData,
+  allBookingsData,
+  customerIndex,
+  addNewBookingData,
+  domUpdates,
  } from './scripts';
 
 //QUERY SELECTORS
+const dateControl = document.querySelector('.calander-date');
 const calenderContainer = document.querySelector('.calendar-container');
 const datePickerSection = document.querySelector('.date-picker');
 const selectedDateSection = document.querySelector('selected-date');
@@ -21,16 +28,17 @@ const reservationInfo = document.querySelector('.reservation-info');
 const displayTotalSpent = document.querySelector('.display-total-spent')
 
 //QUERY SELECTORS BUTTONS
+const calendarSubmitBtn = document.querySelector('.submit-calander-date')
 const newResButton = document.querySelector('.new-reservation-js')
-const nextMonthBtn = document.querySelector('.next-month');
-const prevMonthBtn = document.querySelector('.prev-month');
+// const nextMonthBtn = document.querySelector('.next-month');
+// const prevMonthBtn = document.querySelector('.prev-month');
 const showReservationsBtn = document.querySelector('.see-bookings')
 
 //EVENT LISTENERS
-newResButton.addEventListener('click', showCalander);
 window.addEventListener('load', displayInfo)
-nextMonthBtn.addEventListener('click', showNextMonth);
-prevMonthBtn.addEventListener('click', showPrevMonth);
+newResButton.addEventListener('click', showCalander);
+// nextMonthBtn.addEventListener('click', showNextMonth);
+// prevMonthBtn.addEventListener('click', showPrevMonth);
 showReservationsBtn.addEventListener('click', function() {
   displayAllReservations(hotel.findCurrentCustomerBookings())
 });
@@ -49,31 +57,36 @@ let selectedDay = day;
 let selectedMonth = month;
 let selectedYear = year;
 
-mth.innerText = `${months[month]} ${year}`;
+// mth.innerText = `${months[month]} ${year}`;
 populateDates()
+
+
+
+
+
+
+// function grabdate(event) {
+//   event.preventDefault();
+//   console.log(dateControl.value)
+// }
+// const dateControl = document.querySelector('input[type="date"]');
+// const calendarSubmitBtn = document.querySelector('input[type="submit"]')
+
+
 
 
 
 //FUNCTIONS
 
-function displayInfo() {
-
-}
-
-function show(elements) {
-  elements.forEach(element => {
-    element.classList.remove('hidden');
-  });
-}
-
-function hide(elements) {
-  elements.forEach(element => {
-    element.classList.add('hidden')
-  });
+function displayInfo(hotel) {
+  console.log('hi!', hotel)
+  hotel.findCurrentCustomerBookings()
+  hotel.calculateTotalCost()
+  totalSpent()
 }
 
 function totalSpent() {
-  displayTotalSpent.innerText = `$${hotel.totalCost}`
+ displayTotalSpent.innerText = `$${hotel.totalCost}`
 }
 
 function displayAllReservations(customerBookings) {
@@ -86,70 +99,82 @@ function displayAllReservations(customerBookings) {
         room.number === booking.roomNumber)
       reservationInfo.innerHTML += `
         <ul>
-          <li class="booking-date">Date: ${booking.date}</li>
-          <li class="room-type">Room Type: ${selectedRoom.roomType}</li>
+        <li class="booking-date">Date: ${booking.date}</li>
+        <li class="room-type">Room Type: ${selectedRoom.roomType}</li>
         </ul>`
         
     })
   }
 }
-
-
+  
+  
 function populateDates() {
   daySection.innerHTML = '';
-  
+    
   if (month === 1) {
-    daysInMonth = 28;
+      daysInMonth = 28;
   } else if (month === 3 || month === 5 || month === 8 || month === 10) {
     daysInMonth = 30;
   }
     // daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
     // daySection.appendChild(daySection);
-}
-
-function showPrevMonth() {
-  month --;
-  if (month < 0) {
-    month = 11;
-    year--;
   }
-  mth.innerText = `${months[month]} ${year}`;
-}
-
-function showNextMonth() {
-  month++;
-  if (month > 11) {
-    month = 0;
-    year++;
+  
+  function showPrevMonth() {
+    month --;
+    if (month < 0) {
+      month = 11;
+      year--;
+    }
+    mth.innerText = `${months[month]} ${year}`;
   }
-  mth.innerText = `${months[month]} ${year}`;
-}
-
-function showCalander() {
-  datePickerSection.classList.toggle('hidden');
-  populateDates()
-  formatDate(date)
-}
-
-
-
-// HELPER FUNCTIONS
-
-function formatDate(d) {
-  let day = d.getDate();
-  if (day < 10) {
-    day = `0${day}`
+  
+  function showNextMonth() {
+    month++;
+    if (month > 11) {
+      month = 0;
+      year++;
+    }
+    mth.innerText = `${months[month]} ${year}`;
   }
-  let month = d.getMonth() + 1;
-  if (month < 10) {
-    month = `0${month}`
+  
+  function showCalander() {
+    datePickerSection.classList.toggle('hidden');
+    populateDates()
+    formatDate(date)
   }
-  let year = d.getFullYear();
+  
+  
+  
+  // HELPER FUNCTIONS
+  
+  function formatDate(d) {
+    let day = d.getDate();
+    if (day < 10) {
+      day = `0${day}`
+    }
+    let month = d.getMonth() + 1;
+    if (month < 10) {
+      month = `0${month}`
+    }
+    let year = d.getFullYear();
+    
+  }
 
-}
-
-
-export {
+  function show(elements) {
+    elements.forEach(element => {
+      element.classList.remove('hidden');
+    });
+  }
+  
+  function hide(elements) {
+    elements.forEach(element => {
+      element.classList.add('hidden')
+    });
+  }
+  
+  
+  export {
   showCalander, 
   populateDates,
   showPrevMonth,
