@@ -83,7 +83,15 @@ function displayInfo(hotel) {
 
 function displayAvailableRooms() {
   hotel.availableRooms.forEach(room => {
-    
+    reservationInfo.innerHTML += `
+    <section class="room-option">
+      <p class="number">room number: ${room.number}</p>
+      <p class="type">type: ${room.roomType}</p>
+      <p class="bed-size">bed size: ${room.bedSize}</p>
+      <p class="numBeds">beds: ${room.numBeds}</p>
+      <p class="costPerNight">price/night: $${room.costPerNight}</p>
+      </section>
+    `
   } )
 }
 
