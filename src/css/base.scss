@@ -102,12 +102,19 @@ button:hover {
 }
 
 .reservation-info {
+  border: 2px solid green;
   background-color: $header-background;
   color: $button-text;
   font-size: 20px;
   width: 50%;
   padding: 30px;
-  @include flex-center;
+  display: flex;
+  justify-content: center;
+  flex-direction: flex-colum;
+}
+
+.booking-info {
+  border: 2px solid red;
 }
 .hidden {
   display: none;

@@ -5,6 +5,8 @@ class Hotel {
     this.customer = customer;
     this.currentCustomerBookings;
     this.totalCost = 0;
+    this.availableRooms = [];
+    this.unavailableRooms = [];
   }
 
   findCurrentCustomerBookings() {
@@ -27,6 +29,26 @@ class Hotel {
     }, 0)
     this.totalCost = totalCost;
     return totalCost
+  }
+
+  filterAvalibleRooms(roomType, date) {
+    const allMatchingRoomTypes = this.rooms.filter(room => 
+      room.roomType === roomType)
+    const allAvalibleBookings = this.bookings.filter(
+      booking => !booking.date === date)
+
+    const sortRooms = allMatchingRoomTypes.reduce((acc, room) => {
+      allAvalibleBookings.forEach(booking => {
+        if (booking.roomNumber === room.number) {
+          this.availableRooms.push(room)
+          acc.push(room)
+        }else {
+          this.unavailableRooms.push(room)
+        }
+      })
+      return acc
+    }, [])
+    return sortRooms
   }
 }
 
