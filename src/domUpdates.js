@@ -3,19 +3,10 @@
   customers,
   currentCustomer,
   hotel,
-  bookings,
-  rooms,
-  customersData,
-  roomsData,
-  allBookingsData,
-  customerIndex,
-  addNewBookingData,
-  domUpdates,
  } from './scripts';
 
 //QUERY SELECTORS
 const dateControl = document.querySelector('.calander-date');
-const calenderContainer = document.querySelector('.calendar-container');
 const datePickerSection = document.querySelector('.date-picker');
 const selectedDateSection = document.querySelector('selected-date');
 const displayCalander = document.querySelector('.display-calander');
@@ -33,6 +24,8 @@ const newResButton = document.querySelector('.new-reservation-js')
 // const nextMonthBtn = document.querySelector('.next-month');
 // const prevMonthBtn = document.querySelector('.prev-month');
 const showReservationsBtn = document.querySelector('.see-bookings')
+const submitCalanderDateBtn = document.querySelector('.submit-calander-date')
+
 
 //EVENT LISTENERS
 window.addEventListener('load', displayInfo)
@@ -77,6 +70,9 @@ populateDates()
 
 
 //FUNCTIONS
+//display all reservations that match the roomType and all bookings that
+//do not match the booking date
+
 
 
 function displayInfo(hotel) {
@@ -85,23 +81,38 @@ function displayInfo(hotel) {
   totalSpent()
 }
 
+function displayAvailableRooms() {
+  hotel.availableRooms.forEach(room => {
+    reservationInfo.innerHTML += `
+    <section class="room-option id="${room.number}">
+      <p class="number">room number: ${room.number}</p>
+      <p class="type">type: ${room.roomType}</p>
+      <p class="bed-size">bed size: ${room.bedSize}</p>
+      <p class="numBeds">beds: ${room.numBeds}</p>
+      <p class="costPerNight">price/night: $${room.costPerNight}</p>
+      <button class="reserve-room-btn">Reserve</button>
+      </section>
+    `
+    ///update userBookings here!!!!
+  } )
+}
+
 function totalSpent() { 
- displayTotalSpent.innerText = `$${hotel.totalCost}`
+ displayTotalSpent.innerText = `You've spent $${hotel.totalCost} at the Overlook`
 }
 
 function displayAllReservations(customerBookings) {
   AllUserResSection.classList.toggle('hidden')
   reservationInfo.innerHTML = '';
-  console.log(customerBookings)
   if (customerBookings.length > 0) {
     customerBookings.forEach(booking => {
       let selectedRoom = hotel.rooms.find(room => 
         room.number === booking.roomNumber)
       reservationInfo.innerHTML += `
-        <ul>
-        <li class="booking-date">Date: ${booking.date}</li>
-        <li class="room-type">Room Type: ${selectedRoom.roomType}</li>
-        </ul>`
+        <section class="booking-info">
+         <p class="booking-date">Date: ${booking.date}</p>
+         <p class="room-type">Room Type: ${selectedRoom.roomType}</p>
+        </section>`
         
     })
   }
@@ -182,5 +193,8 @@ function populateDates() {
   formatDate,
   displayAllReservations,
   totalSpent,
-  displayInfo
+  displayInfo,
+  show, 
+  hide,
+  displayAvailableRooms,
 }

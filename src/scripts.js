@@ -8,7 +8,10 @@ import {
   populateDates, 
   showPrevMonth, 
   showNextMonth,
-  displayInfo
+  displayInfo,
+  hide,
+  show,
+  displayAvailableRooms
 } from './domUpdates';
 import {
   sampleCustomers,
@@ -40,6 +43,11 @@ let customerIndex;
 let addNewBookingData;
 let user;
 
+
+//QUERYSELECTORS
+
+
+
 //FUNCTIONS
 Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
   .then(data => {[customersData, roomsData, allBookingsData, addNewBookingData] = [
@@ -62,9 +70,44 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
     rooms = data[1].rooms;
     hotel = new Hotel(rooms, bookings, currentCustomer);
-    console.log(hotel)
   displayInfo(hotel)
 }) 
+
+
+//QUERY SELECTORS
+const reservationOptionsPage = 
+document.querySelector('.show-all-booking-options-page');
+const datePickerSection = document.querySelector('.date-picker');
+const calendarSubmitBtn = document.querySelector('.submit-calander-date');
+calendarSubmitBtn.addEventListener('click', findOptionalRooms);
+
+
+function findOptionalRooms() {
+  hide([datePickerSection])
+  show([reservationOptionsPage])
+  let checkedRadioButton = document.querySelector(
+    'input[name="roomType"]:checked').value
+  let inputDate = document.querySelector('input[type="date"]').value;
+  let formatedDate = inputDate.split('-').join('/')
+  hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
+  displayAvailableRooms() 
+}
+
+///
+//target the classList of the select room button and return
+  // update the html for the cards
+  // add an eventListener for the event.target and return
+// the id of the card its assigned to. 
+// (this portion can be a function in the scripts file)
+// 
+//hide the room options page and show room details page
+//page includes the room type, number of beds and date.
+//the selected room is added the the user reservations window
+//
+
+
+
+
 
 
 // window.addEventListenergrabdate(event) {

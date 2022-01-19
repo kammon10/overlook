@@ -101,14 +101,32 @@ button:hover {
   @include flex-center;
 }
 
-.reservation-info {
-  background-color: $header-background;
-  color: $button-text;
-  font-size: 20px;
-  width: 50%;
-  padding: 30px;
+.show-all-booking-options-page {
   @include flex-center;
 }
+
+.reservation-info {
+  background-color: $button-border;
+  opacity: 0.8;
+  color: $button-text;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.room-option {
+  background-color: $header-background;
+  margin: 10px;
+  padding: 10px;
+}
+
+.booking-info {
+  border: 2px solid red;
+}
+
 .hidden {
   display: none;
 }
