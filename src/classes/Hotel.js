@@ -31,24 +31,26 @@ class Hotel {
     return totalCost
   }
 
-  filterAvalibleRooms(roomType, date) {
+  filterAvailableRooms(type, date) {
+    console.log(type)
+    console.log(date)
+    this.availableRooms = [];
     const allMatchingRoomTypes = this.rooms.filter(room => 
-      room.roomType === roomType)
-    const allAvalibleBookings = this.bookings.filter(
-      booking => !booking.date === date)
+      // console.log(room.roomType, type)
+      room.roomType === type)
+      console.log(allMatchingRoomTypes)
+    const allAvailableBookings = this.bookings.filter(booking => 
+      booking.date !== date) 
 
-    const sortRooms = allMatchingRoomTypes.reduce((acc, room) => {
-      allAvalibleBookings.forEach(booking => {
-        if (booking.roomNumber === room.number) {
-          this.availableRooms.push(room)
+    const findRooms = allMatchingRoomTypes.reduce((acc, room) => {
+      allAvailableBookings.forEach(booking => { 
+        if (booking.roomNumber === room.number && !acc.includes(room.number)) {
           acc.push(room)
-        }else {
-          this.unavailableRooms.push(room)
         }
       })
       return acc
     }, [])
-    return sortRooms
+    this.availableRooms = [...new Set(findRooms)]
   }
 }
 

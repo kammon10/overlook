@@ -10,7 +10,8 @@ import {
   showNextMonth,
   displayInfo,
   hide,
-  show
+  show,
+  displayAvailableRooms
 } from './domUpdates';
 import {
   sampleCustomers,
@@ -88,9 +89,9 @@ function findOptionalRooms() {
     'input[name="roomType"]:checked').value
   let inputDate = document.querySelector('input[type="date"]').value;
   let formatedDate = inputDate.split('-').join('/')
-
-
-  hotel.filterAvalibleRooms(checkedRadioButton, formatedDate);
+  hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
+  displayAvailableRooms()
+  
 }
 
 // window.addEventListenergrabdate(event) {

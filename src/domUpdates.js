@@ -3,14 +3,6 @@
   customers,
   currentCustomer,
   hotel,
-  bookings,
-  rooms,
-  customersData,
-  roomsData,
-  allBookingsData,
-  customerIndex,
-  addNewBookingData,
-  domUpdates,
  } from './scripts';
 
 //QUERY SELECTORS
@@ -89,6 +81,12 @@ function displayInfo(hotel) {
   totalSpent()
 }
 
+function displayAvailableRooms() {
+  hotel.availableRooms.forEach(room => {
+    
+  } )
+}
+
 function totalSpent() { 
  displayTotalSpent.innerText = `$${hotel.totalCost}`
 }
@@ -96,7 +94,6 @@ function totalSpent() {
 function displayAllReservations(customerBookings) {
   AllUserResSection.classList.toggle('hidden')
   reservationInfo.innerHTML = '';
-  console.log(customerBookings)
   if (customerBookings.length > 0) {
     customerBookings.forEach(booking => {
       let selectedRoom = hotel.rooms.find(room => 
@@ -189,4 +186,5 @@ function populateDates() {
   displayInfo,
   show, 
   hide,
+  displayAvailableRooms,
 }
