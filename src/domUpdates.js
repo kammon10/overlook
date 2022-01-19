@@ -1,84 +1,38 @@
  import {
-  userIndex,
-  customers,
-  currentCustomer,
   hotel,
+  findOptionalRooms
  } from './scripts';
 
 //QUERY SELECTORS
-const dateControl = document.querySelector('.calander-date');
+const reservationOptionsPage = 
+document.querySelector('.show-all-booking-options-page');
 const datePickerSection = document.querySelector('.date-picker');
-const selectedDateSection = document.querySelector('selected-date');
-const displayCalander = document.querySelector('.display-calander');
-const monthSection = document.querySelector('.month');
-const mth = document.querySelector('.mth');
-const daySection = document.querySelector('.days');
-const roomTypeForm = document.querySelector('.room-type-form');
+const calendarSubmitBtn = document.querySelector('.submit-calander-date');
+calendarSubmitBtn.addEventListener('click', findOptionalRooms);
 const AllUserResSection = document.querySelector('.show-all-reservations-page');
 const reservationInfo = document.querySelector('.reservation-info');
 const displayTotalSpent = document.querySelector('.display-total-spent')
 
 //QUERY SELECTORS BUTTONS
-const calendarSubmitBtn = document.querySelector('.submit-calander-date')
 const newResButton = document.querySelector('.new-reservation-js')
-// const nextMonthBtn = document.querySelector('.next-month');
-// const prevMonthBtn = document.querySelector('.prev-month');
 const showReservationsBtn = document.querySelector('.see-bookings')
-const submitCalanderDateBtn = document.querySelector('.submit-calander-date')
 
 
 //EVENT LISTENERS
 window.addEventListener('load', displayInfo)
 newResButton.addEventListener('click', showCalander);
-// nextMonthBtn.addEventListener('click', showNextMonth);
-// prevMonthBtn.addEventListener('click', showPrevMonth);
 showReservationsBtn.addEventListener('click', function() {
   displayAllReservations(hotel.findCurrentCustomerBookings())
 });
 
-//UNIVERSAL VARS
 
-const months = ['January', 'Febuary', 'March', 'April', 'May', 
-'Jun','July', 'August', 'September', 'October', 'November', 'December'];
-let date = new Date();
-let day = date.getDay();
-let month = date.getMonth();
-let year = date.getFullYear();
-
-let selectedDate = date;
-let selectedDay = day;
-let selectedMonth = month;
-let selectedYear = year;
-
-// mth.innerText = `${months[month]} ${year}`;
-populateDates()
-
-
-
-
-
-
-// function grabdate(event) {
-//   event.preventDefault();
-//   console.log(dateControl.value)
-// }
-// const dateControl = document.querySelector('input[type="date"]');
-// const calendarSubmitBtn = document.querySelector('input[type="submit"]')
-
-
-
-
-
-//FUNCTIONS
-//display all reservations that match the roomType and all bookings that
-//do not match the booking date
-
+//FUNCTONS
 
 
 function displayInfo(hotel) {
   hotel.findCurrentCustomerBookings()
   hotel.calculateTotalCost()
-  totalSpent()
+  showTotalSpent()
 }
 
 function displayAvailableRooms() {
@@ -97,8 +51,9 @@ function displayAvailableRooms() {
   } )
 }
 
-function totalSpent() { 
- displayTotalSpent.innerText = `You've spent $${hotel.totalCost} at the Overlook`
+function showTotalSpent() { 
+  displayTotalSpent.innerText = `
+ You've spent $${hotel.totalCost} at the Overlook`
 }
 
 function displayAllReservations(customerBookings) {
@@ -119,58 +74,13 @@ function displayAllReservations(customerBookings) {
 }
   
   
-function populateDates() {
-  daySection.innerHTML = '';
-    
-  if (month === 1) {
-      daysInMonth = 28;
-  } else if (month === 3 || month === 5 || month === 8 || month === 10) {
-    daysInMonth = 30;
-  }
-    // daySection.innerHTML += `<section class="${day}">${i + 1}</section>`
-    // daySection.appendChild(daySection);
-  }
-  
-  function showPrevMonth() {
-    month --;
-    if (month < 0) {
-      month = 11;
-      year--;
-    }
-    mth.innerText = `${months[month]} ${year}`;
-  }
-  
-  function showNextMonth() {
-    month++;
-    if (month > 11) {
-      month = 0;
-      year++;
-    }
-    mth.innerText = `${months[month]} ${year}`;
-  }
-  
-  function showCalander() {
-    datePickerSection.classList.toggle('hidden');
-    populateDates()
-    formatDate(date)
-  }
-  
-  
-  
-  // HELPER FUNCTIONS
-  
-  function formatDate(d) {
-    let day = d.getDate();
-    if (day < 10) {
-      day = `0${day}`
-    }
-    let month = d.getMonth() + 1;
-    if (month < 10) {
-      month = `0${month}`
-    }
-    let year = d.getFullYear();
-    
-  }
+
+
+
+// HELPER FUNCTIONS
+function showCalander() {
+  datePickerSection.classList.toggle('hidden');
+}
 
   function show(elements) {
     elements.forEach(element => {
@@ -187,14 +97,12 @@ function populateDates() {
   
   export {
   showCalander, 
-  populateDates,
-  showPrevMonth,
-  showNextMonth,
-  formatDate,
   displayAllReservations,
-  totalSpent,
+  showTotalSpent,
   displayInfo,
   show, 
   hide,
   displayAvailableRooms,
+  datePickerSection,
+  reservationOptionsPage,
 }

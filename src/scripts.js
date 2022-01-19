@@ -3,21 +3,14 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-import {
-  showCalander, 
-  populateDates, 
-  showPrevMonth, 
-  showNextMonth,
+import { 
   displayInfo,
   hide,
   show,
-  displayAvailableRooms
+  displayAvailableRooms,
+  datePickerSection,
+  reservationOptionsPage,
 } from './domUpdates';
-import {
-  sampleCustomers,
-  sampleBookings,
-  sampleRooms
-} from './testData/testData';
 
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
@@ -41,10 +34,7 @@ let roomsData;
 let allBookingsData;
 let customerIndex;
 let addNewBookingData;
-let user;
 
-
-//QUERYSELECTORS
 
 
 
@@ -75,11 +65,7 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
 
 //QUERY SELECTORS
-const reservationOptionsPage = 
-document.querySelector('.show-all-booking-options-page');
-const datePickerSection = document.querySelector('.date-picker');
-const calendarSubmitBtn = document.querySelector('.submit-calander-date');
-calendarSubmitBtn.addEventListener('click', findOptionalRooms);
+
 
 
 function findOptionalRooms() {
@@ -92,6 +78,19 @@ function findOptionalRooms() {
   hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
   displayAvailableRooms() 
 }
+
+function reserveRoom(e) {
+  e.preventDefault()
+  hide([]);
+  show([]);
+}
+///return hotel.availableRooms === parsInt(e.targe.id)
+//  const roomNum = hotel.availibleRooms.find(room => room.number === parsInt(e.target.id))
+//  createNewBooking(roomNum)
+//make a new reservation with the userID, 
+//date === dateInput
+//roomNumber === parsInt(e.taget.id);
+//roomServicecharges
 
 ///
 //target the classList of the select room button and return
@@ -108,14 +107,6 @@ function findOptionalRooms() {
 
 
 
-
-
-// window.addEventListenergrabdate(event) {
-//     event.preventDefault();
-//     console.log(dateControl.value)
-//   }
-
-
 export {
   userIndex,
   customers,
@@ -128,4 +119,5 @@ export {
   allBookingsData,
   customerIndex,
   addNewBookingData,
+  findOptionalRooms
 }
