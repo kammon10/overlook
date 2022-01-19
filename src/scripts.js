@@ -76,7 +76,7 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
 //QUERY SELECTORS
 const reservationOptionsPage = 
-document.querySelector('.show-all-bookingOptions-page');
+document.querySelector('.show-all-booking-options-page');
 const datePickerSection = document.querySelector('.date-picker');
 const calendarSubmitBtn = document.querySelector('.submit-calander-date');
 calendarSubmitBtn.addEventListener('click', findOptionalRooms);
@@ -90,9 +90,25 @@ function findOptionalRooms() {
   let inputDate = document.querySelector('input[type="date"]').value;
   let formatedDate = inputDate.split('-').join('/')
   hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
-  displayAvailableRooms()
-  
+  displayAvailableRooms() 
 }
+
+///
+//target the classList of the select room button and return
+  // update the html for the cards
+  // add an eventListener for the event.target and return
+// the id of the card its assigned to. 
+// (this portion can be a function in the scripts file)
+// 
+//hide the room options page and show room details page
+//page includes the room type, number of beds and date.
+//the selected room is added the the user reservations window
+//
+
+
+
+
+
 
 // window.addEventListenergrabdate(event) {
 //     event.preventDefault();

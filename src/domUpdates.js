@@ -84,19 +84,21 @@ function displayInfo(hotel) {
 function displayAvailableRooms() {
   hotel.availableRooms.forEach(room => {
     reservationInfo.innerHTML += `
-    <section class="room-option">
+    <section class="room-option id="${room.number}">
       <p class="number">room number: ${room.number}</p>
       <p class="type">type: ${room.roomType}</p>
       <p class="bed-size">bed size: ${room.bedSize}</p>
       <p class="numBeds">beds: ${room.numBeds}</p>
       <p class="costPerNight">price/night: $${room.costPerNight}</p>
+      <button class="reserve-room-btn">Reserve</button>
       </section>
     `
+    ///update userBookings here!!!!
   } )
 }
 
 function totalSpent() { 
- displayTotalSpent.innerText = `$${hotel.totalCost}`
+ displayTotalSpent.innerText = `You've spent $${hotel.totalCost} at the Overlook`
 }
 
 function displayAllReservations(customerBookings) {

@@ -36,21 +36,25 @@ class Hotel {
     console.log(date)
     this.availableRooms = [];
     const allMatchingRoomTypes = this.rooms.filter(room => 
-      // console.log(room.roomType, type)
       room.roomType === type)
-      console.log(allMatchingRoomTypes)
+  
     const allAvailableBookings = this.bookings.filter(booking => 
       booking.date !== date) 
-
-    const findRooms = allMatchingRoomTypes.reduce((acc, room) => {
-      allAvailableBookings.forEach(booking => { 
-        if (booking.roomNumber === room.number && !acc.includes(room.number)) {
-          acc.push(room)
-        }
-      })
-      return acc
-    }, [])
-    this.availableRooms = [...new Set(findRooms)]
+    
+    if (type === 'all rooms') {
+      this.availableRooms = allAvailableBookings
+    } else {
+      const findRooms = allMatchingRoomTypes.reduce((acc, room) => {
+        allAvailableBookings.forEach(booking => { 
+          if (booking.roomNumber === room.number
+             && !acc.includes(room.number)) {
+            acc.push(room)
+          }
+        })
+        return acc
+      }, [])
+      this.availableRooms = [...new Set(findRooms)]
+    }
   }
 }
 
