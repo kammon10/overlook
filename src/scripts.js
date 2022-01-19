@@ -4,12 +4,12 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import { 
-  displayInfo,
   hide,
   show,
   displayAvailableRooms,
   datePickerSection,
   reservationOptionsPage,
+  showTotalSpent,
 } from './domUpdates';
 
 import Customer from './classes/Customer';
@@ -66,7 +66,11 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
 //QUERY SELECTORS
 
-
+ function displayInfo() {
+  hotel.findCurrentCustomerBookings()
+  hotel.calculateTotalCost()
+  showTotalSpent()
+}
 
 function findOptionalRooms() {
   hide([datePickerSection])
@@ -119,5 +123,6 @@ export {
   allBookingsData,
   customerIndex,
   addNewBookingData,
-  findOptionalRooms
+  findOptionalRooms,
+  displayInfo
 }

@@ -1,6 +1,7 @@
  import {
   hotel,
-  findOptionalRooms
+  findOptionalRooms,
+  displayInfo,
  } from './scripts';
 
 //QUERY SELECTORS
@@ -21,19 +22,13 @@ const showReservationsBtn = document.querySelector('.see-bookings')
 //EVENT LISTENERS
 window.addEventListener('load', displayInfo)
 newResButton.addEventListener('click', showCalander);
-showReservationsBtn.addEventListener('click', function() {
-  displayAllReservations(hotel.findCurrentCustomerBookings())
-});
+showReservationsBtn.addEventListener('click', displayAllReservations);
 
 
 //FUNCTONS
 
 
-function displayInfo(hotel) {
-  hotel.findCurrentCustomerBookings()
-  hotel.calculateTotalCost()
-  showTotalSpent()
-}
+
 
 function displayAvailableRooms() {
   hotel.availableRooms.forEach(room => {
@@ -56,14 +51,16 @@ function showTotalSpent() {
  You've spent $${hotel.totalCost} at the Overlook`
 }
 
-function displayAllReservations(customerBookings) {
+function displayAllReservations() {
+  console.log('all res')
+  const customerBookings = hotel.findCurrentCustomerBookings()
   AllUserResSection.classList.toggle('hidden')
   reservationInfo.innerHTML = '';
   if (customerBookings.length > 0) {
     customerBookings.forEach(booking => {
       let selectedRoom = hotel.rooms.find(room => 
         room.number === booking.roomNumber)
-      reservationInfo.innerHTML += `
+      AllUserResSection.innerHTML += `
         <section class="booking-info">
          <p class="booking-date">Date: ${booking.date}</p>
          <p class="room-type">Room Type: ${selectedRoom.roomType}</p>
@@ -73,10 +70,6 @@ function displayAllReservations(customerBookings) {
   }
 }
   
-  
-
-
-
 // HELPER FUNCTIONS
 function showCalander() {
   datePickerSection.classList.toggle('hidden');
@@ -99,7 +92,6 @@ function showCalander() {
   showCalander, 
   displayAllReservations,
   showTotalSpent,
-  displayInfo,
   show, 
   hide,
   displayAvailableRooms,

@@ -105,7 +105,11 @@ button:hover {
   @include flex-center;
 }
 
-.reservation-info {
+.booking-info {
+  border: 2px solid red;
+}
+
+.reservation-info  {
   background-color: $button-border;
   opacity: 0.8;
   color: $button-text;
@@ -123,9 +127,6 @@ button:hover {
   padding: 10px;
 }
 
-.booking-info {
-  border: 2px solid red;
-}
 
 .hidden {
   display: none;
