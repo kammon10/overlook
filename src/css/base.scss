@@ -15,6 +15,12 @@ body {
   padding: 1%;
 }
 
+.login-page {
+  @include flex-center;
+  background-color: $header-background;
+  color: #d1cdb0
+}
+
 .header-styling {
   border: none;
   @include flex-row;
@@ -105,7 +111,12 @@ button:hover {
   @include flex-center;
 }
 
-.reservation-info {
+.booking-info {
+  background-color: $header-background;
+  color: $button-text;
+}
+
+.reservation-info  {
   background-color: $button-border;
   opacity: 0.8;
   color: $button-text;
@@ -121,11 +132,9 @@ button:hover {
   background-color: $header-background;
   margin: 10px;
   padding: 10px;
+  color: $button-text;
 }
 
-.booking-info {
-  border: 2px solid red;
-}
 
 .hidden {
   display: none;

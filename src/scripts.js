@@ -3,21 +3,22 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-import {
-  showCalander, 
-  populateDates, 
-  showPrevMonth, 
-  showNextMonth,
-  displayInfo,
+import { 
   hide,
   show,
-  displayAvailableRooms
+  displayAvailableRooms,
+  datePickerSection,
+  reservationOptionsPage,
+  showTotalSpent,
+  logInPage,
+  logInSection,
+  customerPage,
+  userName,
+  password,
+  roomOption,
+  reservationInfo
+
 } from './domUpdates';
-import {
-  sampleCustomers,
-  sampleBookings,
-  sampleRooms
-} from './testData/testData';
 
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
@@ -26,7 +27,7 @@ import {
 allCustomersAPI, 
 roomsAPI, 
 allBookingsAPI, 
-addNewBookingAPI   
+addNewBooking,   
 } from './apiCalls'
 
 // GLOBAL VARIABLES
@@ -41,28 +42,31 @@ let roomsData;
 let allBookingsData;
 let customerIndex;
 let addNewBookingData;
-let user;
 
-
-//QUERYSELECTORS
 
 
 
 //FUNCTIONS
-Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
+function fetchAll(id) {
+  //pass in the user id and refactor
+Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBooking])
   .then(data => {[customersData, roomsData, allBookingsData, addNewBookingData] = [
   data[0], data[1], data[2], data[3]];
 
-    function getRandomIndex(array) {
-      return Math.floor(Math.random() * array.length)
-    } 
+    // function getRandomIndex(array) {
+    //   return Math.floor(Math.random() * array.length)
+    // } 
 
     customers = data[0].customers.map(customer => {
       return new Customer(customer)
     })
+    console.log('id', id)
 
-    currentCustomer = new Customer(customers[getRandomIndex(customers)])
-    
+    let newBooking = data[3]
+    console.log('newBooking', newBooking)
+
+    currentCustomer = customers.find(customer => customer.id === id)
+    console.log('currentCust', currentCustomer)
    
     bookings = data[2].bookings.map(booking => {
       return new Booking(booking)
@@ -70,17 +74,30 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
     rooms = data[1].rooms;
     hotel = new Hotel(rooms, bookings, currentCustomer);
-  displayInfo(hotel)
-}) 
-
+    }) 
+}
 
 //QUERY SELECTORS
-const reservationOptionsPage = 
-document.querySelector('.show-all-booking-options-page');
-const datePickerSection = document.querySelector('.date-picker');
-const calendarSubmitBtn = document.querySelector('.submit-calander-date');
-calendarSubmitBtn.addEventListener('click', findOptionalRooms);
 
+function displayInfo(e) {
+ e.preventDefault();
+  // console.log('testing')
+  hide([logInPage])
+  show([customerPage])
+  let thisUserName = userName.value;
+  let thisUserPassword = password.value;
+  let userNameIndex8 = [thisUserName.charAt(8)]
+  let userNameIndex9 = [thisUserName.charAt(9)]
+  let userLogInID = Number(`${userNameIndex8}${userNameIndex9}`)
+  if (userLogInID > 0 && userLogInID <= 50 && thisUserPassword === 'overlook2021') {
+    // console.log('test condition', userLogInID)
+    fetchAll(userLogInID)
+  }
+  hotel.findCurrentCustomerBookings()
+  hotel.calculateTotalCost()
+  showTotalSpent()
+  console.log('before add booking', hotel.currentCustomerBookings)
+}
 
 function findOptionalRooms() {
   hide([datePickerSection])
@@ -91,7 +108,39 @@ function findOptionalRooms() {
   let formatedDate = inputDate.split('-').join('/')
   hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
   displayAvailableRooms() 
+
 }
+let selectedRoom;
+// let reserveThisRoom = document.querySelector()
+reservationInfo.addEventListener('click', function(event) {
+  selectedRoom = Number(event.target.id)
+  captureRoom(selectedRoom)
+})
+
+function captureRoom(roomNum) {
+
+  // const reserveRoomNumber =  Number(event.target.id)
+  
+  addNewBooking(currentCustomer.id, hotel.customerSelectedDate, roomNum)
+  hotel.findCurrentCustomerBookings()
+  console.log('after add booking', hotel)
+}
+
+function reserveRoom(e) {
+  e.preventDefault()
+  hide([]);
+  show([]);
+  // console.log('roomVar', reserveThisRoom)
+}
+
+// const buttonMessage = document.getElementById(`m${e.target.id}`);
+///return hotel.availableRooms === parsInt(e.targe.id)
+//  const roomNum = hotel.availibleRooms.find(room => room.number === parsInt(e.target.id))
+//  createNewBooking(roomNum)
+//make a new reservation with the userID, 
+//date === dateInput
+//roomNumber === parsInt(e.taget.id);
+//roomServicecharges
 
 ///
 //target the classList of the select room button and return
@@ -108,14 +157,6 @@ function findOptionalRooms() {
 
 
 
-
-
-// window.addEventListenergrabdate(event) {
-//     event.preventDefault();
-//     console.log(dateControl.value)
-//   }
-
-
 export {
   userIndex,
   customers,
@@ -128,4 +169,7 @@ export {
   allBookingsData,
   customerIndex,
   addNewBookingData,
+  findOptionalRooms,
+  displayInfo,
+  fetchAll
 }

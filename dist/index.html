@@ -8,55 +8,66 @@
 </head>
 <body>
   <script src="bundle.js"></script>
-  <section class="header-section">
-    <h1>Overlook Hotel</h1>
-    <div class="header-styling">
-      <button class="see-bookings">my reservations</button>
-      <p class="display-total-spent"></p>
+  <form class="login-page ">
+    <div>
+      <input class="user-name" type="text" name="login">
+        <label for="user-name">User Name</label>
     </div>
-    <button class="new-reservation-js">new reservation</button>
-  </section>
-  <section class="show-all-booking-options-page hidden">
-    <section class="reservation-info"></section>
-  </section>
-  <section class="calendar-container">
-    <div class="date-picker hidden">
-      <form class="room-type-form">
-          <div class="radio-styling">
-            <input type="radio" name="roomType" value="all rooms">
-              <label for="all-rooms">All Avalible Rooms</label>
-            <div class="radio-display">
-              <input type="radio" name="roomType" value="residential suite">
-              <label for="residential">Residential Suite</label>
-            </div>
-            <div class="radio-display">
-              <input type="radio" name="roomType" value="junior suite">
-              <label for="junior">Junior Suite</label>
-            </div>
-          </div>
-          <div class="radio-styling">
-            <div class="radio-display">
-              <input type="radio" name="roomType" value="suite">
-              <label for="suite">Suite</label>
-            </div> 
-            <div class="radio-display">
-              <input type="radio" name="roomType" value="single room">
-              <label for="single">Single Room</label>
-            </div>
-          </div>
-        </form>
-         <label for="start">Start date:</label>
-          <input class="calander-date" type="date" id="start" name="trip-start" min="2022-01-01" max="2022-12-31" required>
-          <button class="submit-calander-date" type="submit" id='checkInBtn'>submit</button>
-      <!-- <section class="dates datesjs">
-        <section class="month">
-          <button class="arrows prev-month"><</button>
-          <div class="mth"></div>
-          <button class="arrows next-month">></button>
-        </section> -->
-        <section class="days"></section>
+    <div>
+      <input class="password" type="text" name="login">
+        <label for="password">password</label>
+    </div>
+    <button class="log-in-button">submit</button>
+  </form>
+  <section class="customer-page hidden">
+    <section class="header-section">
+      <h1>Overlook Hotel</h1>
+      <div class="header-styling">
+        <button class="see-bookings">my reservations</button>
+        <p class="display-total-spent"></p>
+      </div>
+      <button class="new-reservation-js">new reservation</button>
+    </section>
+    <section class="show-all-booking-options-page hidden">
+      <section class="reservation-info">
+        
       </section>
-    </div>
+    </section>
+    <section class="show-all-reservations-page hidden">
+    </section>
+    <section class="calendar-container">
+      <div class="date-picker hidden">
+        <form class="room-type-form">
+            <div class="radio-styling">
+              <input type="radio" name="roomType" value="all rooms">
+                <label for="all-rooms">All Avalible Rooms</label>
+              <div class="radio-display">
+                <input type="radio" name="roomType" value="residential suite">
+                <label for="residential">Residential Suite</label>
+              </div>
+              <div class="radio-display">
+                <input type="radio" name="roomType" value="junior suite">
+                <label for="junior">Junior Suite</label>
+              </div>
+            </div>
+            <div class="radio-styling">
+              <div class="radio-display">
+                <input type="radio" name="roomType" value="suite">
+                <label for="suite">Suite</label>
+              </div> 
+              <div class="radio-display">
+                <input type="radio" name="roomType" value="single room">
+                <label for="single">Single Room</label>
+              </div>
+            </div>
+          </form>
+           <label for="start">Start date:</label>
+            <input class="calander-date" type="date" id="start" name="trip-start" min="2022-01-01" max="2022-12-31" required>
+            <button class="submit-calander-date" type="submit" id='checkInBtn'>submit<button>
+          <section class="days"></section>
+        </section>
+      </div>
+    </section>
   </section>
   <script src="bundle.js"></script>
 </body>
