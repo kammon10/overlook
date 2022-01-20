@@ -25,7 +25,7 @@ import {
 allCustomersAPI, 
 roomsAPI, 
 allBookingsAPI, 
-addNewBookingAPI   
+addNewBooking,   
 } from './apiCalls'
 
 // GLOBAL VARIABLES
@@ -47,22 +47,24 @@ let addNewBookingData;
 //FUNCTIONS
 function fetchAll(id) {
   //pass in the user id and refactor
-Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
+Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBooking])
   .then(data => {[customersData, roomsData, allBookingsData, addNewBookingData] = [
   data[0], data[1], data[2], data[3]];
 
-    function getRandomIndex(array) {
-      return Math.floor(Math.random() * array.length)
-    } 
+    // function getRandomIndex(array) {
+    //   return Math.floor(Math.random() * array.length)
+    // } 
 
     customers = data[0].customers.map(customer => {
       return new Customer(customer)
     })
     console.log('id', id)
-    
+
+    let newBooking = data[3]
+    console.log('newBooking', newBooking)
 
     currentCustomer = customers.find(customer => customer.id === id)
-    console.log(currentCustomer)
+    console.log('currentCust', currentCustomer)
    
     bookings = data[2].bookings.map(booking => {
       return new Booking(booking)
@@ -70,14 +72,14 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
     rooms = data[1].rooms;
     hotel = new Hotel(rooms, bookings, currentCustomer);
-}) 
+    }) 
 }
 
 //QUERY SELECTORS
 
 function displayInfo(e) {
  e.preventDefault();
-  console.log('testing')
+  // console.log('testing')
   hide([logInPage])
   show([customerPage])
   let thisUserName = userName.value;
@@ -86,12 +88,12 @@ function displayInfo(e) {
   let userNameIndex9 = [thisUserName.charAt(9)]
   let userLogInID = Number(`${userNameIndex8}${userNameIndex9}`)
   if (userLogInID > 0 && userLogInID <= 50 && thisUserPassword === 'overlook2021') {
+    // console.log('test condition', userLogInID)
     fetchAll(userLogInID)
   }
   hotel.findCurrentCustomerBookings()
   hotel.calculateTotalCost()
   showTotalSpent()
-
 }
 
 function findOptionalRooms() {
@@ -105,11 +107,11 @@ function findOptionalRooms() {
   displayAvailableRooms() 
 }
 
-function reserveRoom(e) {
-  e.preventDefault()
-  hide([]);
-  show([]);
-}
+// function reserveRoom(e) {
+//   e.preventDefault()
+//   hide([]);
+//   show([]);
+// }
 ///return hotel.availableRooms === parsInt(e.targe.id)
 //  const roomNum = hotel.availibleRooms.find(room => room.number === parsInt(e.target.id))
 //  createNewBooking(roomNum)
