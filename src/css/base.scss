@@ -106,7 +106,7 @@ button:hover {
 }
 
 .booking-info {
-  border: 2px solid red;
+  background-color: $header-background;
 }
 
 .reservation-info  {
@@ -125,6 +125,7 @@ button:hover {
   background-color: $header-background;
   margin: 10px;
   padding: 10px;
+  color: $button-text;
 }
 
 

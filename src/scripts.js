@@ -10,6 +10,12 @@ import {
   datePickerSection,
   reservationOptionsPage,
   showTotalSpent,
+  logInPage,
+  logInSection,
+  customerPage,
+  userName,
+  password
+
 } from './domUpdates';
 
 import Customer from './classes/Customer';
@@ -39,6 +45,8 @@ let addNewBookingData;
 
 
 //FUNCTIONS
+function fetchAll(id) {
+  //pass in the user id and refactor
 Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
   .then(data => {[customersData, roomsData, allBookingsData, addNewBookingData] = [
   data[0], data[1], data[2], data[3]];
@@ -60,16 +68,28 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
 
     rooms = data[1].rooms;
     hotel = new Hotel(rooms, bookings, currentCustomer);
-  displayInfo(hotel)
 }) 
-
+}
 
 //QUERY SELECTORS
 
- function displayInfo() {
+function displayInfo(e) {
+ e.preventDefault();
+  console.log('testing')
+  hide([logInPage])
+  show([customerPage])
+  let thisUserName = userName.value;
+  let thisUserPassword = password.value;
+  let userNameIndex8 = [thisUserName.charAt(8)]
+  let userNameIndex9 = [thisUserName.charAt(9)]
+  let userLogInID = Number(`${userNameIndex8}${userNameIndex9}`)
+  if (userLogInID > 0 && userLogInID <= 50 && thisUserPassword === 'overlook2021') {
+    fetchAll(userLogInID)
+  }
   hotel.findCurrentCustomerBookings()
   hotel.calculateTotalCost()
   showTotalSpent()
+
 }
 
 function findOptionalRooms() {
@@ -124,5 +144,6 @@ export {
   customerIndex,
   addNewBookingData,
   findOptionalRooms,
-  displayInfo
+  displayInfo,
+  fetchAll
 }
