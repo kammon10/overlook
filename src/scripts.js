@@ -58,9 +58,11 @@ Promise.all([allCustomersAPI, roomsAPI, allBookingsAPI, addNewBookingAPI])
     customers = data[0].customers.map(customer => {
       return new Customer(customer)
     })
-
-    currentCustomer = new Customer(customers[getRandomIndex(customers)])
+    console.log('id', id)
     
+
+    currentCustomer = customers.find(customer => customer.id === id)
+    console.log(currentCustomer)
    
     bookings = data[2].bookings.map(booking => {
       return new Booking(booking)

@@ -15,6 +15,12 @@ body {
   padding: 1%;
 }
 
+.login-page {
+  @include flex-center;
+  background-color: $header-background;
+  color: #d1cdb0
+}
+
 .header-styling {
   border: none;
   @include flex-row;
@@ -107,6 +113,7 @@ button:hover {
 
 .booking-info {
   background-color: $header-background;
+  color: $button-text;
 }
 
 .reservation-info  {
