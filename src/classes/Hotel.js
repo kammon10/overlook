@@ -7,6 +7,7 @@ class Hotel {
     this.totalCost = 0;
     this.availableRooms = [];
     this.unavailableRooms = [];
+    this.customerSelectedDate;
   }
 
   findCurrentCustomerBookings() {
@@ -32,6 +33,7 @@ class Hotel {
   }
 
   filterAvailableRooms(type, date) {
+    this.customerSelectedDate = date
     console.log(type)
     console.log(date)
     this.availableRooms = [];

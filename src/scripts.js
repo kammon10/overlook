@@ -14,7 +14,9 @@ import {
   logInSection,
   customerPage,
   userName,
-  password
+  password,
+  roomOption,
+  reservationInfo
 
 } from './domUpdates';
 
@@ -94,6 +96,7 @@ function displayInfo(e) {
   hotel.findCurrentCustomerBookings()
   hotel.calculateTotalCost()
   showTotalSpent()
+  console.log('before add booking', hotel.currentCustomerBookings)
 }
 
 function findOptionalRooms() {
@@ -105,13 +108,32 @@ function findOptionalRooms() {
   let formatedDate = inputDate.split('-').join('/')
   hotel.filterAvailableRooms(checkedRadioButton, formatedDate);
   displayAvailableRooms() 
+
+}
+let selectedRoom;
+// let reserveThisRoom = document.querySelector()
+reservationInfo.addEventListener('click', function(event) {
+  selectedRoom = Number(event.target.id)
+  captureRoom(selectedRoom)
+})
+
+function captureRoom(roomNum) {
+
+  // const reserveRoomNumber =  Number(event.target.id)
+  
+  addNewBooking(currentCustomer.id, hotel.customerSelectedDate, roomNum)
+  hotel.findCurrentCustomerBookings()
+  console.log('after add booking', hotel)
 }
 
-// function reserveRoom(e) {
-//   e.preventDefault()
-//   hide([]);
-//   show([]);
-// }
+function reserveRoom(e) {
+  e.preventDefault()
+  hide([]);
+  show([]);
+  // console.log('roomVar', reserveThisRoom)
+}
+
+// const buttonMessage = document.getElementById(`m${e.target.id}`);
 ///return hotel.availableRooms === parsInt(e.targe.id)
 //  const roomNum = hotel.availibleRooms.find(room => room.number === parsInt(e.target.id))
 //  createNewBooking(roomNum)

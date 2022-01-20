@@ -16,7 +16,8 @@ const displayTotalSpent = document.querySelector('.display-total-spent');
 const logInPage = document.querySelector('.login-page');
 const customerPage = document.querySelector('.customer-page');
 const userName = document.querySelector('.user-name');
-const password = document.querySelector('.password')
+const password = document.querySelector('.password');
+const roomOption = document.querySelector('.room-option')
 
 //QUERY SELECTORS BUTTONS
 const newResButton = document.querySelector('.new-reservation-js');
@@ -34,19 +35,20 @@ showReservationsBtn.addEventListener('click', displayAllReservations);
 
 //FUNCTONS
 
-
+///addEventListener to rservationInfo
+//listen for click and return e.target.id
 
 
 function displayAvailableRooms() {
   hotel.availableRooms.forEach(room => {
     reservationInfo.innerHTML += `
-    <section class="room-option id="${room.number}">
+    <section class="room-option id="r${room.number}">
       <p class="number">room number: ${room.number}</p>
       <p class="type">type: ${room.roomType}</p>
       <p class="bed-size">bed size: ${room.bedSize}</p>
       <p class="numBeds">beds: ${room.numBeds}</p>
       <p class="costPerNight">price/night: $${room.costPerNight}</p>
-      <button class="reserve-room-btn">Reserve</button>
+      <button class="reserve-room-btn" id="${room.number}">Reserve</button>
       </section>
     `
     ///update userBookings here!!!!
@@ -106,9 +108,10 @@ function showCalander() {
   reservationOptionsPage,
   logInButton,
   logInPage,
- 
+  roomOption,
   customerPage,
   userName,
   password,
+  reservationInfo
 
 }
